@@ -1,0 +1,22 @@
+# In VS Code terminal, run:
+cat > .gitignore << 'EOF'
+# Salesforce DX
+.sfdx/
+.sf/
+*.tgz
+
+# Node
+node_modules/
+npm-debug.log
+
+# VS Code
+.vscode/settings.json
+.vscode/launch.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build
+dist/
+EOF
