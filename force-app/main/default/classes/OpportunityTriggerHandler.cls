@@ -3,7 +3,7 @@ public with sharing class OpportunityTriggerHandler {
 
     public void handleTriggerLogic(){
         if(Trigger.isAfter && Trigger.isInsert){
-            oppTriggerHandler.afterInsert(Trigger.new);
+            afterInsert(Trigger.new);
         }
     }
 
