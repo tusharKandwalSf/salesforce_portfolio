@@ -48,12 +48,13 @@ public with sharing class CaseTriggerService {
     }
 
     public void setResolutionTime(List<Case> casesToUpdate){
+        List<Case> casesToUpdateInner = new List<Case>();
         for(Case cse: casesToUpdate){
             Long diffMs = cse.ClosedDate.getTime() - cse.CreatedDate.getTime();
             Long diffHours = diffMs / (1000 * 60 * 60);
-            cse.Resolution_Time__c = diffHours;
+            casesToUpdateInner.add(new Case(Id = cse.Id, Resolution_Time__c = diffHours));
         }
-        update casesToUpdate;
+        update casesToUpdateInner;
     }
 
     public void validateCaseResolution(List<Case> newCases, Map<Id,Case> oldCaseMap){
