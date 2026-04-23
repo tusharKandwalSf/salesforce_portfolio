@@ -1,19 +1,31 @@
 public with sharing class OpportunityTriggerHandler {
 
-
-    public void handleTriggerLogic(){
-        if(Trigger.isAfter && Trigger.isInsert){
-            afterInsert(Trigger.new);
-        }
-    }
-
+	OpportunityTriggerService service = new OpportunityTriggerService();
+    
     public void afterInsert(List<Opportunity> newList) {
-        List<Opportunity> oppList = new List<Opportunity>();
-        for(Opportunity opp : newList){
-            if(opp.CloseDate == null){
-                opp.CloseDate = System.today();
-            }
-        }
+       service.settleCloseDate(newList);
+    }
+    
+    public void beforeInsert(List<Opportunity> newList) {
+       service.setIsMajorDeal(newList);
+    }
+    
+   	public void afterUpdate(List<Opportunity> newOpps, Map<Id, Opportunity> oldMap) {
+    	service.createFollowUpTasks(newOpps, oldMap);
+	}
+    
+    public void beforeUpdate(List<Opportunity> newList) {
+       service.setIsMajorDeal(newList);
+    }
+    
+    public void afterDelete(List<Opportunity> oldList, Map<Id, Opportunity> oldMap) {
+       service.logAudits(oldList);
+    }
+    public void beforeDelete(List<Opportunity> oldList) {
+       service.stopOpportunityDeletion(oldList);
+    }
+    public void afterUndelete(List<Opportunity> newList){
+        
     }
 
 }
