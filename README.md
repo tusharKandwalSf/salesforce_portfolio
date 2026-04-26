@@ -1,3 +1,5 @@
+[![Salesforce CI](https://github.com/tusharKandwalSf/salesforce_portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/tusharKandwalSf/salesforce_portfolio/actions/workflows/ci.yml)
+
 # Salesforce DX Project: Next Steps
 
 Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
