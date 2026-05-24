@@ -1,0 +1,16 @@
+<template>
+    <c-leave-request-child onleaverequest={handleLeaveRequest}
+    employee-name={employeeName}
+    employee-i-d={employeeID}>
+    </c-leave-request-child>
+
+    <template if:true={leaveType}>
+        <p>Name: {employeeName}</p>
+        <p>ID: {employeeID}</p>
+        <p>Leave Type: {leaveType}</p>
+        <p>From Date: {fromDate}</p>
+        <p>To Date: {toDate}</p>
+        <p>Reason: {reason}</p>
+    </template>
+
+</template>
