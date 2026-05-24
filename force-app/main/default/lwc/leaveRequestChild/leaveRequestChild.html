@@ -1,0 +1,26 @@
+<template>
+
+    <h1>Submitting Leave request as {employeeName} and ID: {employeeID}</h1>
+    <lightning-card title ="Leave Request Details" icon-name="standard:leave_request">
+        <div class="slds-p-horizontal_medium">
+            <lightning-combobox
+            name="leaveType"
+            label="Leave Type"
+            value={value}
+            placeholder="Select Leave Type"
+            options={options}
+            onchange={handleChange} ></lightning-combobox>
+            <template if:true= {availableLeaveBalance}>
+                <p>Available Balance: {availableLeaveBalance}</p>
+            </template>
+
+            <lightning-input type="date" name="fromDate" label="From date" onchange={handleFromDateChange} ></lightning-input>
+            <lightning-input type="date" name="toDate" label="To date" onchange={handleToDateChange} ></lightning-input>
+            <lightning-textarea name="reason" label="Reason for Leave" onchange={handleReasonChange} ></lightning-textarea>
+            <lightning-button variant="brand" label="Submit" title="Submit Leave Request" onclick={handleLeaveRequest} class="slds-m-left_x-small"></lightning-button>
+
+    <p>Selected value is: {value}</p>
+        </div>
+        </lightning-card>
+    
+</template>
