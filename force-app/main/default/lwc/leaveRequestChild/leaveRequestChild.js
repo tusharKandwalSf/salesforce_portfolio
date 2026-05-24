@@ -5,9 +5,9 @@ export default class LeaveRequestChild extends LightningElement {
     @api employeeName;
     @api employeeID;
 
-    @track sickLeaveCount;
-    @track casualLeaveCount;
-    @track earnedLeaveCount;
+    sickLeaveCount;
+    casualLeaveCount;
+    earnedLeaveCount;
 
     value = '';
     options = [
@@ -22,9 +22,6 @@ export default class LeaveRequestChild extends LightningElement {
         this.earnedLeaveCount = 15;
     }
 
-    renderedCallback(){
-
-    }
     get availableLeaveBalance(){
         if(this.value === 'sick') return this.sickLeaveCount;
         if(this.value === 'casual') return this.casualLeaveCount;
