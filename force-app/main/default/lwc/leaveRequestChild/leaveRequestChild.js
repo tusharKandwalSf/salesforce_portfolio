@@ -1,9 +1,38 @@
-import { LightningElement,api,track } from 'lwc';
+import { LightningElement,api,wire } from 'lwc';
+import leaveRequests from '@salesforce/apex/LeaveRequestTrackerController.leaveRequests';
+import saveLeaveRequest from '@salesforce/apex/LeaveRequestTrackerController.saveLeaveRequest';
+import { refreshApex } from '@salesforce/apex';
 
 export default class LeaveRequestChild extends LightningElement {
 
     @api employeeName;
     @api employeeID;
+    leaves = [];
+    error;
+    leaveObj = {};
+    wiredResult;
+
+    columns = [
+        { label: 'Leave Type', fieldName: 'Leave_Type__c' },
+        { label: 'From Date', fieldName: 'From_Date__c', type: 'date' },
+        { label: 'To Date', fieldName: 'To_Date__c', type: 'date' },
+        { label: 'Reason', fieldName: 'Reason__c' },
+        { label: 'Status', fieldName: 'Status__c' }
+    ]
+
+    @wire(leaveRequests, {employeeId: '$employeeID'})
+    wiredLeaveRequestsResult (result){
+        this.wiredResult = result;
+        const { data, error } = result;
+        if(data){
+            this.leaves = data;
+            console.log('Leave Requests: ', this.leaves);
+            this.error = undefined;
+        } else if(error){
+            this.error = error;
+            this.leaves = [];
+        }
+    }
 
     sickLeaveCount;
     casualLeaveCount;
@@ -82,6 +111,13 @@ export default class LeaveRequestChild extends LightningElement {
         }
         this.verifyLeaveBalance(this.value);
         this.dispatchEvent(leaveRequestEvent);
+        this.leaveObj = {Employee_ID__c:this.employeeID, Employee_Name__c:this.employeeName, Leave_Type__c:this.value, From_Date__c:this.fromDate, To_Date__c:this.toDate, Reason__c:this.reason, Status__c:'Pending'};
+        saveLeaveRequest({leaveRequest: this.leaveObj})
+        .then(()=>{
+            return refreshApex(this.wiredResult);
+        }).catch(error=>{
+            console.error('Error saving leave request: ', error);
+        })
     }
 
 }

@@ -14,6 +14,19 @@
                 <p>Available Balance: {availableLeaveBalance}</p>
             </template>
 
+            
+            <lightning-datatable
+                key-field="id"
+                data={leaves}
+                columns={columns}>
+            </lightning-datatable>
+   
+
+
+            <template if:true={error}>
+                <p style="color:red;">Error loading leave history: {error.body.message}</p>
+            </template>
+
             <lightning-input type="date" name="fromDate" label="From date" onchange={handleFromDateChange} ></lightning-input>
             <lightning-input type="date" name="toDate" label="To date" onchange={handleToDateChange} ></lightning-input>
             <lightning-textarea name="reason" label="Reason for Leave" onchange={handleReasonChange} ></lightning-textarea>
