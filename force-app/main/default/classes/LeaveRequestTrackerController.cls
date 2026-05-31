@@ -14,8 +14,9 @@ public with sharing class LeaveRequestTrackerController {
     }   
 
     @AuraEnabled
-    public static void saveLeaveRequest(LeaveRequestTracker__c leaveRequest){
+    public static Id saveLeaveRequest(LeaveRequestTracker__c leaveRequest){
         insert leaveRequest;
+        return leaveRequest.Id;
     }
 
 }
