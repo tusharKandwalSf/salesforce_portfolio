@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>LeaveRequestChannel</masterLabel>
+    <isExposed>true</isExposed>
+    <description>Channel for Leave Request updates</description>
+    <lightningMessageFields>
+        <fieldName>Id</fieldName>
+        <description>Unique identifier for the leave request</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>leaveType</fieldName>
+        <description>Type of leave submitted</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>employeeName</fieldName>
+        <description>Name of employee</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>status</fieldName>
+        <description>Status of leave request</description>
+    </lightningMessageFields>
+</LightningMessageChannel>

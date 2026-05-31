@@ -1,0 +1,12 @@
+<template>
+
+    <template if:true={receivedMessage}>
+        <p>Employee: {receivedMessage.employeeName}</p>
+        <p>Leave Type: {receivedMessage.leaveType}</p>
+        <p>Status: {receivedMessage.status}</p>
+
+        <lightning-button label="View Record" onclick={handleNavigate}></lightning-button>
+
+    </template>
+    
+</template>
